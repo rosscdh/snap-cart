@@ -1,0 +1,2 @@
+apistar==0.3.9
+mongoengine==0.15.0
