@@ -15,8 +15,8 @@ def detail_cart(cart):
     return {}
 
 
-def add_product(cart, product):
-    return {}
+def modify_cart(cart, data: Cart):
+    return data
 
 # def remove_product(cart, product):
 #     return {}
@@ -52,7 +52,7 @@ def update_promotion(cart, promotion):
 routes = [
     Route('/', 'GET', welcome),
     Route('/cart/{cart}', 'GET', detail_cart),
-    Route('/cart/{cart}', 'POST', add_product),
+    Route('/cart/{cart}', 'POST', modify_cart),
     # Route('/cart/{cart}/products/{product}', 'DELETE', remove_product),
     # Route('/cart/{cart}/products/{product}', 'PUT', update_product),
 

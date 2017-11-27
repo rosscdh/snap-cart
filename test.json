@@ -1,0 +1,6 @@
+{
+    "user": "r.crawford@example.com",
+    "products": [{"name":"test"}],
+    "vouchers": [],
+    "coupons": []
+}
