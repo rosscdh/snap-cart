@@ -1,13 +1,15 @@
-from apistar import Include, Route
+from apistar import Command, Include, Route
 from apistar.frameworks.wsgi import WSGIApp as App
 from apistar.handlers import docs_urls, static_urls
+
+from commands.sign_product import (sign_product,
+                                   unsign_product)
 
 from models.cart import (Cart,
                          Product)
 
 from serializers.cart import (CartSerializer,
                               ProductSerializer)
-
 
 def _create_empty_cart(slug: str) -> Cart:
     return Cart(slug=slug)
@@ -109,7 +111,13 @@ routes = [
     Include('/static', static_urls)
 ]
 
-app = App(routes=routes)
+commands = [
+    Command('sign_product', sign_product),
+    Command('unsign_product', unsign_product),
+]
+
+app = App(routes=routes,
+          commands=commands)
 
 
 if __name__ == '__main__':

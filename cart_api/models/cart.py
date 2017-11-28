@@ -8,6 +8,9 @@ connect('snap_cart')
 
 class Product(fields.EmbeddedDocument):
     name = fields.StringField(required=True, max_length=128)
+    agreed_price = fields.DecimalField(required=True, max_length=128,
+                                       precision=2)
+    signature = fields.StringField(required=True, max_length=128)
 
 
 class Voucher(fields.EmbeddedDocument):

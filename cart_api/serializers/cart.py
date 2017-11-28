@@ -4,6 +4,8 @@ from apistar import typesystem
 class ProductSerializer(typesystem.Object):
     properties = {
         'name': typesystem.string(max_length=100),
+        'agreed_price': typesystem.integer(),
+        'signature': typesystem.string(max_length=255),
     }
 
 

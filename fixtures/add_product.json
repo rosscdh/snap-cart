@@ -1,3 +1,5 @@
 {
-    "name": "blah product"
+    "name": "Example Product 1",
+    "agreed_price": 75.00,
+    "signature": "blah product"
 }
