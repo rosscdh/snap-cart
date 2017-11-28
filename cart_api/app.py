@@ -1,3 +1,4 @@
+import json
 from apistar import Command, Include, Route
 from apistar.frameworks.wsgi import WSGIApp as App
 from apistar.handlers import docs_urls, static_urls
@@ -27,6 +28,11 @@ def welcome(name=None):
     if name is None:
         return {'message': 'Welcome to API Star!'}
     return {'message': 'Welcome to API Star, %s!' % name}
+
+
+def products():
+    products = json.load(open('../fixtures/products.json'))
+    return [ProductSerializer(product) for product in products]
 
 
 def detail_cart(id: str):
@@ -92,6 +98,9 @@ def add_product(id: str, product: ProductSerializer):
 
 routes = [
     Route('/', 'GET', welcome),
+    # example products
+    Route('/products', 'GET', products),
+
     Route('/cart/{id}', 'GET', detail_cart),
     Route('/cart/{id}', 'POST', modify_cart),
     Route('/cart/{id}', 'DELETE', remove_cart),

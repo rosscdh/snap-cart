@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Example Product 1",
+        "agreed_price": 75.00,
+        "signature": "eyJuYW1lIjoiRXhhbXBsZSBQcm9kdWN0IDEiLCJwcmljZSI6Ijc1LjAwIn0.xeSXHiBkQSiIDrUKnayd0292p_o"
+    },
+    {
+        "name": "Example Product 2",
+        "agreed_price": 62.30,
+        "signature": "eyJuYW1lIjoiRXhhbXBsZSBQcm9kdWN0IDIiLCJwcmljZSI6IjYyLjMwIn0.3e5mH92hDS7mWRDENwtjhvuBaVU"
+    },
+    {
+        "name": "Example Product 3",
+        "agreed_price": 150.70,
+        "signature": "eyJuYW1lIjoiRXhhbXBsZSBQcm9kdWN0IDMiLCJwcmljZSI6IjE1MC43MCJ9.Ozr5Qz81foRs6fpiymJCGY8A9dY"
+    },
+    {
+        "name": "Example Product 4",
+        "agreed_price": 24.15,
+        "signature": "eyJuYW1lIjoiRXhhbXBsZSBQcm9kdWN0IDQiLCJwcmljZSI6IjI0LjE1In0.BytUVgiU5bpwGWRVkgfwOo9bEKQ"
+    },
+    {
+        "name": "Example Product 5",
+        "agreed_price": 5.00,
+        "signature": "eyJuYW1lIjoiRXhhbXBsZSBQcm9kdWN0IDUiLCJwcmljZSI6IjUuMDAifQ.eVYnaKHyIivzOX5P30mn5i8njfk"
+    }
+]

@@ -1,5 +1,7 @@
 from apistar import typesystem
 
+from commands.sign_product import sign_product
+
 
 class ProductSerializer(typesystem.Object):
     properties = {
@@ -7,6 +9,9 @@ class ProductSerializer(typesystem.Object):
         'agreed_price': typesystem.integer(),
         'signature': typesystem.string(max_length=255),
     }
+
+    def is_valid(self, valid_signature) -> bool:
+        return valid_signature == self.signature
 
 
 class CartSerializer(typesystem.Object):
