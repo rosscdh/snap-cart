@@ -12,5 +12,5 @@ docker-compose up
 ### Use
 
 ```
-cat test.json | http post http://127.0.0.1:8080/cart/my-cart-id
+cat fixtures/basic.json | http post http://127.0.0.1:8080/cart/my-cart-id
 ```

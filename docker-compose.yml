@@ -4,7 +4,7 @@ web:
   ports:
     - "8080:8080"
   volumes:
-    - ./cart-api:/usr/src/app
+    - ./cart_api:/usr/src/app
     - ./cart-frontend:/usr/src/frontend
   links:
     - db

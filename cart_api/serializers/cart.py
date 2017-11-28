@@ -1,13 +1,13 @@
 from apistar import typesystem
 
 
-class Product(typesystem.Object):
+class ProductSerializer(typesystem.Object):
     properties = {
         'name': typesystem.string(max_length=100),
     }
 
 
-class Cart(typesystem.Object):
+class CartSerializer(typesystem.Object):
     properties = {
         'user': typesystem.string(max_length=100),
         'products': typesystem.array(),

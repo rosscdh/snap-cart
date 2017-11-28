@@ -1,5 +1,5 @@
 {
-    "user": "r.crawford@example.com",
+    "user": "bob@example.com",
     "products": [{"name":"test"}],
     "vouchers": [],
     "coupons": []

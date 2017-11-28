@@ -2,7 +2,23 @@ from apistar import Include, Route
 from apistar.frameworks.wsgi import WSGIApp as App
 from apistar.handlers import docs_urls, static_urls
 
-from serializers.cart import Cart, Product
+from models.cart import (Cart,
+                         Product)
+
+from serializers.cart import (CartSerializer,
+                              ProductSerializer)
+
+
+def _create_empty_cart(slug: str) -> Cart:
+    return Cart(slug=slug)
+
+
+def _cart_by_slug(slug: str) -> Cart:
+    cart = Cart.objects.get(slug=slug) or _create_empty_cart(slug=slug)
+    if not cart.pk:
+        # uff not good
+        cart.save()
+    return cart
 
 
 def welcome(name=None):
@@ -11,12 +27,35 @@ def welcome(name=None):
     return {'message': 'Welcome to API Star, %s!' % name}
 
 
-def detail_cart(cart):
+def detail_cart(id: str):
+    cart = _cart_by_slug(slug=id)
+    cart_serializer = CartSerializer(cart._data)
+    return cart_serializer
+
+
+def modify_cart(id: str, data: CartSerializer):
+    """
+    """
+    cart = _cart_by_slug(slug=id)
+
+    cart.user           = data.get('user')
+    cart.products       = [Product(**product) for product in data.get('products', [])]
+    # cart.vouchers       = data.get('vouchers', [])
+    # cart.coupons        = data.get('coupons', [])
+    cart.save()
+
+    return data
+
+
+def remove_cart(id: str):
+    cart = _cart_by_slug(slug=id)
+    cart.delete()
     return {}
 
 
-def modify_cart(cart, data: Cart):
-    return data
+def add_product(id: str, product: ProductSerializer):
+    cart = _cart_by_slug(slug=id)
+    return cart.to_json()
 
 # def remove_product(cart, product):
 #     return {}
@@ -25,34 +64,36 @@ def modify_cart(cart, data: Cart):
 #     return {}
 
 
-def add_voucher(cart):
-    return {}
+# def add_voucher(id):
+#     return {}
 
 
-def remove_voucher(cart, voucher):
-    return {}
+# def remove_voucher(id: str, cart: CartSerializer):
+#     return {}
 
 
-def update_voucher(cart, voucher):
-    return {}
+# def update_voucher(id: str, cart: CartSerializer, voucher: VoucherSerializer):
+#     return {}
 
 
-def add_promotion(cart):
-    return {}
+# def add_promotion(cart):
+#     return {}
 
 
-def remove_promotion(cart, promotion):
-    return {}
+# def remove_promotion(cart, promotion):
+#     return {}
 
 
-def update_promotion(cart, promotion):
-    return {}
+# def update_promotion(cart, promotion):
+#     return {}
 
 
 routes = [
     Route('/', 'GET', welcome),
-    Route('/cart/{cart}', 'GET', detail_cart),
-    Route('/cart/{cart}', 'POST', modify_cart),
+    Route('/cart/{id}', 'GET', detail_cart),
+    Route('/cart/{id}', 'POST', modify_cart),
+    Route('/cart/{id}', 'DELETE', remove_cart),
+    Route('/cart/{id}/products', 'POST', add_product),
     # Route('/cart/{cart}/products/{product}', 'DELETE', remove_product),
     # Route('/cart/{cart}/products/{product}', 'PUT', update_product),
 

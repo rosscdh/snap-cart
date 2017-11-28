@@ -6,14 +6,26 @@ from mongoengine import Document, fields, connect
 connect('snap_cart')
 
 
-class Cart(Document):
-    user = fields.EmailField(required=True, max_length=200)
-    products = fields.EmbeddedDocumentListField(fields.EmbeddedDocument())
-    vouchers = fields.EmbeddedDocumentListField(fields.EmbeddedDocument())
-    coupons = fields.EmbeddedDocumentListField(fields.EmbeddedDocument())
+class Product(fields.EmbeddedDocument):
+    name = fields.StringField(required=True, max_length=128)
 
-    date_created = fields.DateTimeField(default=datetime.datetime.utcnow)
-    date_updatd = fields.DateTimeField(default=datetime.datetime.utcnow)
+
+class Voucher(fields.EmbeddedDocument):
+    name = fields.StringField(required=True, max_length=128)
+
+
+class Coupon(fields.EmbeddedDocument):
+    name = fields.StringField(required=True, max_length=128)
+
+
+class Cart(Document):
+    slug = fields.StringField(required=True, max_length=128)
+    user = fields.EmailField(max_length=128)
+    products = fields.EmbeddedDocumentListField(Product)
+    vouchers = fields.EmbeddedDocumentListField(Voucher)
+    coupons = fields.EmbeddedDocumentListField(Coupon)
+
+    date_updated = fields.DateTimeField(default=datetime.datetime.utcnow)
 
     meta = {
         'allow_inheritance': False
