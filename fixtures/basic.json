@@ -1,6 +1,10 @@
 {
     "user": "bob@example.com",
-    "products": [{"name":"test"}],
+    "products": [{
+        "name": "Example Product 1",
+        "agreed_price": 75.00,
+        "signature": "eyJuYW1lIjoiRXhhbXBsZSBQcm9kdWN0IDEiLCJwcmljZSI6Ijc1LjAwIn0.xeSXHiBkQSiIDrUKnayd0292p_o"
+    }],
     "vouchers": [],
     "coupons": []
 }
