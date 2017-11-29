@@ -10,14 +10,11 @@ class ProductSerializer(typesystem.Object):
         'signature': typesystem.string(max_length=255),
     }
 
-    def is_valid(self, valid_signature) -> bool:
-        return valid_signature == self.signature
-
 
 class CartSerializer(typesystem.Object):
     properties = {
         'user': typesystem.string(max_length=100),
-        'products': typesystem.array(),
-        'vouchers': typesystem.array(),
-        'coupons': typesystem.array(),
+        'products': typesystem.array(items=[ProductSerializer], min_items=0),
+        'vouchers': typesystem.array(min_items=0, unique_items=True),
+        'coupons': typesystem.array(min_items=0, unique_items=True),
     }

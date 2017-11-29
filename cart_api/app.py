@@ -17,7 +17,7 @@ def _create_empty_cart(slug: str) -> Cart:
 
 
 def _cart_by_slug(slug: str) -> Cart:
-    cart = Cart.objects.get(slug=slug) or _create_empty_cart(slug=slug)
+    cart = Cart.objects.filter(slug=slug).first() or _create_empty_cart(slug=slug)
     if not cart.pk:
         # uff not good
         cart.save()
@@ -37,7 +37,12 @@ def products():
 
 def detail_cart(id: str):
     cart = _cart_by_slug(slug=id)
-    cart_serializer = CartSerializer(cart._data)
+    cart_serializer = CartSerializer({
+        'user': cart.user,
+        'products': [ProductSerializer(product._data) for product in cart.products],
+        'vouchers': [],
+        'coupons': [],
+    })
     return cart_serializer
 
 
@@ -61,9 +66,20 @@ def remove_cart(id: str):
     return {}
 
 
-def add_product(id: str, product: ProductSerializer):
+def add_product(id: str, data: ProductSerializer):
     cart = _cart_by_slug(slug=id)
-    return cart.to_json()
+    product = Product(**data)
+
+    cart.products.append(product)
+    cart.save()
+
+    cart_serializer = CartSerializer({
+        'user': cart.user,
+        'products': [ProductSerializer(product._data) for product in cart.products],
+        'vouchers': [],
+        'coupons': [],
+    })
+    return cart_serializer
 
 # def remove_product(cart, product):
 #     return {}
