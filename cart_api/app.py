@@ -113,6 +113,16 @@ def add_product(id: str, data: ProductSerializer):
 #     return {}
 
 
+def done(id: str):
+    cart = _cart_by_slug(slug=id)
+    #
+    # Send info to 3rd party systems
+    # perform log of done event via email/log/influxdb
+    # trigger other relevant events
+    #
+    return {}
+
+
 routes = [
     Route('/', 'GET', welcome),
     # example products
@@ -122,6 +132,8 @@ routes = [
     Route('/cart/{id}', 'POST', modify_cart),
     Route('/cart/{id}', 'DELETE', remove_cart),
     Route('/cart/{id}/products', 'POST', add_product),
+
+    Route('/cart/{id}/done', 'POST', done),
     # Route('/cart/{cart}/products/{product}', 'DELETE', remove_product),
     # Route('/cart/{cart}/products/{product}', 'PUT', update_product),
 
