@@ -51,8 +51,9 @@ def modify_cart(id: str, data: CartSerializer):
     """
     cart = _cart_by_slug(slug=id)
 
-    cart.user           = data.get('user')
-    cart.products       = [Product(**product) for product in data.get('products', [])]
+    cart.user = data.get('user')
+
+    cart.products = [Product(**product) for product in data.get('products', [])]
     # cart.vouchers       = data.get('vouchers', [])
     # cart.coupons        = data.get('coupons', [])
     cart.save()
