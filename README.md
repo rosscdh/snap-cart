@@ -31,6 +31,8 @@ cat fixtures/add_product.json | http post http://localhost:8080/cart/my-cart-id/
 ```
 
 2. all state changes, quantity change, delete product, add product, add voucher, add promotion
+Its at this point that you would decide from a UX pov if voucher/discount services woudl be called on every state change
+OR at a point after setting up the cart. The voucer/discount service should be optimised as a seperate project to be as efficient and light as possible
 
 ```
 cat fixtures/thin-cart.json | http post http://localhost:8080/cart/my-cart-id
@@ -38,6 +40,7 @@ cat fixtures/fat-cart.json | http post http://localhost:8080/cart/my-cart-id
 ```
 
 3. user is DONE, presses pay now
+Its here that one would pass the completed order to a validation service that would check for actual validity of product (and availability) and then pass it on to the payment service
 
 ```
 http post http://localhost:8080/cart/my-cart-id/done
