@@ -49,7 +49,13 @@ http post http://localhost:8080/cart/my-cart-id/done
 
 ### Shared secret signature
 
-To prevent the user from tampering with the product info and pricing, a shared secret is used to cryptographicaly encrypt the name and price
+To prevent the user from tampering with the product info and pricing, a shared secret is used to cryptographicaly encrypt the name and price.. for example.. tho of course pk and a few other things would be better.
+
+This is critical to ensure that the product can be vouched for as being valid.. 
+
+**remember** the customer does not have the secret.. so they cannot fake the signature.
+
+It is evaluated on every cart state change... but the actual product selection should still be activated at the point of purchase at the "done" method call!.. remember performance is not about NOT touching the database.. but rather touching it at the right time... with a minimum of table churn. as many/most/all shop systems completely fail at. (correct me if wrong)
 
 __Set your token__
 
