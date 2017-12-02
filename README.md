@@ -32,7 +32,8 @@ cat fixtures/add_product.json | http post http://localhost:8080/cart/my-cart-id/
 
 2. all state changes, quantity change, delete product, add product, add voucher, add promotion
 Its at this point that you would decide from a UX pov if voucher/discount services woudl be called on every state change
-OR at a point after setting up the cart. The voucer/discount service should be optimised as a seperate project to be as efficient and light as possible
+OR at a point after setting up the cart. The voucer/discount service should be optimised as a seperate project to be as efficient and light as possible.
+**note** the voucher coupon services woudl return validation with the same type of signature.. so that it can be guaranteed at the point of "done"
 
 ```
 cat fixtures/thin-cart.json | http post http://localhost:8080/cart/my-cart-id
