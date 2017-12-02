@@ -8,7 +8,7 @@ Carts at scale are very complicated.. and slow
 Make a fast cart that cant handle many many requests without significant touching of the database
 1. Validate that the user has not tampered with the sent data (without a db lookup on product)
 2. Treat the cart as a statemachine: this implies sending the COMPLETE cart everytime something in the cart changes (yes, yes, higher data tx/rx but better less handling of state on the server-side)
-3. Assume the client is always right, but validate they have not tampered with the important things (price,name)
+3. Assume the client is always right, but validate they have not tampered with the important things (price,name, or whatever but for this lets assume price and name)
 
 
 ### Run
